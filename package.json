@@ -1,0 +1,15 @@
+{
+  "name": "quickbite",
+  "version": "1.0.0",
+  "description": "QuickBite - Full Stack MERN Restaurant Ordering System",
+  "scripts": {
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "build": "npm run build --prefix client",
+    "seed": "node server/utils/seedData.js",
+    "install:all": "npm install --prefix server && npm install --prefix client"
+  },
+  "keywords": ["mern", "restaurant", "ordering", "react", "nodejs"],
+  "author": "",
+  "license": "ISC"
+}
