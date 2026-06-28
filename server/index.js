@@ -43,7 +43,7 @@ app.use(cors({
 
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 15 * 60 * 1000,
   max: 100,
   message: { success: false, message: 'Too many requests, please try again later.' },
 });
@@ -61,7 +61,10 @@ if (process.env.NODE_ENV !== 'test') {
 // Static files for uploads
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Health check — placed before rate limiter routes
+// Health check — outside /api rate limiter
+app.get('/health', (req, res) => {
+  res.json({ success: true, message: 'QuickBite API is running!' });
+});
 app.get('/api/health', (req, res) => {
   res.json({ success: true, message: 'QuickBite API is running!' });
 });
