@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "name": "Auto Git Push on File Edit",
+  "description": "Automatically stages, commits, and pushes all changes to GitHub after any file is saved in the quickbite project",
+  "version": "1",
+  "when": {
+    "type": "postToolUse",
+    "toolTypes": [
+      "write"
+    ]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "cd /d \"c:\\Users\\preesubs\\OneDrive\\Documents\\quickbite\" && git add -A && git diff --cached --quiet || git commit -m \"auto: sync changes\" && git push origin main",
+    "timeout": 60
+  }
+}

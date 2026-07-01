@@ -42,7 +42,7 @@ const orderSchema = new mongoose.Schema(
     },
     paymentMethod: {
       type: String,
-      enum: ['COD', 'UPI', 'Card'],
+      enum: ['COD', 'Razorpay'],
       required: true,
     },
     paymentStatus: {
@@ -50,6 +50,8 @@ const orderSchema = new mongoose.Schema(
       enum: ['Pending', 'Paid', 'Failed'],
       default: 'Pending',
     },
+    razorpayOrderId: { type: String },
+    razorpayPaymentId: { type: String },
     orderStatus: {
       type: String,
       enum: ['Pending', 'Confirmed', 'Preparing', 'Out for Delivery', 'Delivered', 'Cancelled'],
@@ -58,12 +60,23 @@ const orderSchema = new mongoose.Schema(
     deliveryAddress: {
       type: String,
       required: [true, 'Delivery address is required'],
-      maxlength: [300, 'Address cannot exceed 300 characters'],
+      maxlength: [500, 'Address cannot exceed 500 characters'],
+    },
+    coordinates: {
+      lat: { type: Number },
+      lng: { type: Number },
     },
     phone: {
       type: String,
       required: [true, 'Phone number is required'],
       maxlength: [20, 'Phone cannot exceed 20 characters'],
+    },
+    deliveryPartner: {
+      name: { type: String },
+      phone: { type: String },
+      vehicle: { type: String },
+      rating: { type: Number },
+      avatar: { type: String },
     },
   },
   { timestamps: true }
