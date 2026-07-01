@@ -165,6 +165,30 @@ const UserDashboardPage = () => {
                       {order.items?.length} items · {order.paymentMethod} · {order.paymentStatus}
                     </div>
 
+                    {/* Delivery partner mini card */}
+                    {order.deliveryPartner?.name && (
+                      <div className="flex items-center gap-3 bg-orange-50 dark:bg-orange-900/20 rounded-xl p-3 mb-3">
+                        <div className="w-9 h-9 bg-primary rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                          {order.deliveryPartner.avatar}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold text-secondary dark:text-white truncate">
+                            {order.deliveryPartner.name}
+                          </p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                            {order.deliveryPartner.vehicle}
+                          </p>
+                        </div>
+                        <a
+                          href={`tel:${order.deliveryPartner.phone}`}
+                          className="text-green-600 hover:text-green-700 bg-green-100 hover:bg-green-200 p-2 rounded-xl transition-colors"
+                          title="Call delivery partner"
+                        >
+                          📞
+                        </a>
+                      </div>
+                    )}
+
                     {order.orderStatus !== 'Cancelled' && (
                       <StatusTimeline currentStatus={order.orderStatus} />
                     )}
