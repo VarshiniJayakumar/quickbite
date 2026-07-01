@@ -5,6 +5,7 @@ import { MdStar, MdChevronLeft, MdChevronRight, MdLocalOffer } from 'react-icons
 import api from '../services/api'
 import FoodCard from '../components/FoodCard'
 import SkeletonCard from '../components/SkeletonCard'
+import toast from 'react-hot-toast'
 
 const CATEGORIES = [
   { name: 'Burger', emoji: '🍔' },
@@ -255,7 +256,7 @@ const HomePage = () => {
             className="text-center mb-10"
           >
             <h2 className="section-title">Special Offers</h2>
-            <p className="text-gray-500 dark:text-gray-400">Use these codes at checkout to save big</p>
+            <p className="text-gray-500 dark:text-gray-400">Click a code to copy it — use at checkout to save big</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -266,16 +267,21 @@ const HomePage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.15 }}
-                whileHover={{ scale: 1.03 }}
-                className={`bg-gradient-to-r ${offer.color} text-white rounded-2xl p-6 shadow-lg cursor-pointer`}
+                whileHover={{ scale: 1.03, y: -4 }}
+                className={`bg-gradient-to-r ${offer.color} text-white rounded-2xl p-6 shadow-lg cursor-pointer select-none`}
+                onClick={() => {
+                  navigator.clipboard.writeText(offer.code)
+                  toast.success(`Code "${offer.code}" copied!`)
+                }}
               >
                 <div className="flex items-center gap-3 mb-3">
                   <MdLocalOffer size={24} />
                   <span className="text-3xl font-extrabold">{offer.title}</span>
                 </div>
                 <p className="text-white/90 mb-4">{offer.desc}</p>
-                <div className="bg-white/20 rounded-xl px-4 py-2 inline-block">
+                <div className="bg-white/20 hover:bg-white/30 transition-colors rounded-xl px-4 py-2 inline-flex items-center gap-2">
                   <span className="font-mono font-bold tracking-widest">{offer.code}</span>
+                  <span className="text-xs opacity-80">📋 tap to copy</span>
                 </div>
               </motion.div>
             ))}
