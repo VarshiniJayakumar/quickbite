@@ -113,6 +113,12 @@ const AdminOrdersPage = () => {
                       }`}>
                         {order.paymentStatus}
                       </span>
+                      {order.paymentMethod === 'Razorpay' && (
+                        <span className="ml-1 text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">Razorpay</span>
+                      )}
+                      {order.paymentMethod === 'COD' && (
+                        <span className="ml-1 text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">COD</span>
+                      )}
                     </td>
                     <td className="px-4 py-3">
                       <select
