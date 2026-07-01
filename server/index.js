@@ -26,17 +26,25 @@ const app = express();
 app.use(helmet());
 app.use(cors({
   origin: function(origin, callback) {
+    // Allow requests with no origin (Postman, mobile apps, server-to-server)
+    if (!origin) return callback(null, true);
+
     const allowed = [
       process.env.CLIENT_URL,
       'http://localhost:5173',
       'http://localhost:3000',
     ].filter(Boolean);
-    // Allow requests with no origin (mobile apps, Postman, etc.)
-    if (!origin || allowed.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error(`CORS blocked: ${origin}`));
+
+    // Also allow any netlify.app subdomain
+    if (
+      allowed.includes(origin) ||
+      origin.endsWith('.netlify.app') ||
+      origin.endsWith('.onrender.com')
+    ) {
+      return callback(null, true);
     }
+
+    return callback(new Error(`CORS blocked: ${origin}`));
   },
   credentials: true,
 }));
