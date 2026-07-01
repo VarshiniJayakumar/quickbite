@@ -22,6 +22,9 @@ connectDB();
 
 const app = express();
 
+// Trust Render's proxy (required for rate limiter to work correctly)
+app.set('trust proxy', 1);
+
 // Security middleware
 app.use(helmet());
 app.use(cors({
