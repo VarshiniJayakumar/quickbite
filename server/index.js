@@ -15,6 +15,7 @@ const foodRoutes = require('./routes/foodRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const paymentRoutes = require('./routes/paymentRoutes');
 const errorHandler = require('./middleware/errorHandler');
 
 // Connect to MongoDB
