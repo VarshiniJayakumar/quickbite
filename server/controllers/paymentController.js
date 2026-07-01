@@ -27,16 +27,14 @@ const DELIVERY_PARTNERS = [
 // @access  Private
 const createRazorpayOrder = async (req, res, next) => {
   try {
-    const { amount } = req.body; // amount in paise (INR * 100)
-
+    const { amount } = req.body;
+    const razorpay = getRazorpay();
     const options = {
-      amount: Math.round(amount * 100), // convert to paise
+      amount: Math.round(amount * 100),
       currency: 'INR',
       receipt: `receipt_${Date.now()}`,
     };
-
     const order = await razorpay.orders.create(options);
-
     res.json({
       success: true,
       orderId: order.id,
