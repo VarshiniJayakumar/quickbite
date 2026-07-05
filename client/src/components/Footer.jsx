@@ -1,24 +1,43 @@
 import { Link } from 'react-router-dom'
-import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
+import { FaInstagram, FaTwitter, FaFacebook, FaYoutube } from 'react-icons/fa'
+import { MdLocationOn, MdPhone, MdEmail, MdAccessTime } from 'react-icons/md'
 
 const Footer = () => {
   return (
-    <footer className="bg-secondary text-gray-300 pt-12 pb-6">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+    <footer className="bg-secondary text-gray-400 relative overflow-hidden">
+      {/* Top glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+
           {/* Brand */}
-          <div>
-            <h2 className="text-2xl font-bold text-white mb-3">
-              Quick<span className="text-primary">Bite</span>
-            </h2>
-            <p className="text-sm leading-relaxed text-gray-400">
-              Fresh, fast, and affordable food delivered straight to your door. 
-              Order now and enjoy restaurant-quality meals at home.
+          <div className="lg:col-span-1">
+            <div className="flex items-center gap-2.5 mb-4">
+              <div className="w-9 h-9 bg-gradient-to-br from-primary to-orange-400 rounded-xl flex items-center justify-center shadow-lg shadow-primary/30">
+                <span className="text-white font-black text-sm">QB</span>
+              </div>
+              <span className="text-xl font-black text-white">
+                Quick<span className="text-primary">Bite</span>
+              </span>
+            </div>
+            <p className="text-sm leading-relaxed text-gray-500 mb-5">
+              Fresh, fast, and affordable food delivered straight to your door. Restaurant-quality meals from the comfort of your home.
             </p>
-            <div className="flex gap-4 mt-4">
-              {[FaFacebook, FaInstagram, FaTwitter, FaYoutube].map((Icon, i) => (
-                <a key={i} href="#" className="text-gray-400 hover:text-primary transition-colors">
-                  <Icon size={18} />
+            <div className="flex gap-3">
+              {[
+                { icon: FaInstagram, href: '#', label: 'Instagram' },
+                { icon: FaTwitter, href: '#', label: 'Twitter' },
+                { icon: FaFacebook, href: '#', label: 'Facebook' },
+                { icon: FaYoutube, href: '#', label: 'YouTube' },
+              ].map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  className="w-9 h-9 bg-white/5 hover:bg-primary/20 hover:text-primary rounded-xl flex items-center justify-center text-gray-500 transition-all duration-200 hover:scale-110"
+                >
+                  <Icon size={15} />
                 </a>
               ))}
             </div>
@@ -26,17 +45,21 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-sm">
+            <h3 className="text-white font-semibold text-sm mb-5 tracking-wide uppercase">Quick Links</h3>
+            <ul className="space-y-3">
               {[
                 { to: '/', label: 'Home' },
-                { to: '/menu', label: 'Menu' },
+                { to: '/menu', label: 'Our Menu' },
                 { to: '/cart', label: 'Cart' },
                 { to: '/dashboard', label: 'My Orders' },
-              ].map((link) => (
-                <li key={link.to}>
-                  <Link to={link.to} className="hover:text-primary transition-colors">
-                    {link.label}
+                { to: '/login', label: 'Sign In' },
+              ].map(({ to, label }) => (
+                <li key={to}>
+                  <Link
+                    to={to}
+                    className="text-sm text-gray-500 hover:text-primary transition-colors duration-150 hover:translate-x-1 inline-block"
+                  >
+                    {label}
                   </Link>
                 </li>
               ))}
@@ -45,35 +68,48 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Contact</h3>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li>📍 123 Food Street, Foodville</li>
-              <li>📞 +91 98765 43210</li>
-              <li>✉️ hello@quickbite.com</li>
-              <li>🕐 Mon–Sun: 9:00 AM – 11:00 PM</li>
+            <h3 className="text-white font-semibold text-sm mb-5 tracking-wide uppercase">Contact Us</h3>
+            <ul className="space-y-3">
+              {[
+                { icon: MdLocationOn, text: '123 Food Street, Bengaluru 560001' },
+                { icon: MdPhone, text: '+91 98765 43210' },
+                { icon: MdEmail, text: 'hello@quickbite.com' },
+                { icon: MdAccessTime, text: 'Mon–Sun: 9:00 AM – 11:00 PM' },
+              ].map(({ icon: Icon, text }) => (
+                <li key={text} className="flex items-start gap-2.5">
+                  <Icon size={16} className="text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-sm text-gray-500 leading-snug">{text}</span>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Newsletter */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Newsletter</h3>
-            <p className="text-sm text-gray-400 mb-3">Get exclusive offers in your inbox.</p>
-            <form onSubmit={(e) => e.preventDefault()} className="flex gap-2">
+            <h3 className="text-white font-semibold text-sm mb-5 tracking-wide uppercase">Stay Updated</h3>
+            <p className="text-sm text-gray-500 mb-4">Get exclusive offers and new menu updates straight to your inbox.</p>
+            <form onSubmit={(e) => e.preventDefault()} className="space-y-2">
               <input
                 type="email"
-                placeholder="Your email"
-                className="flex-1 px-3 py-2 rounded-xl text-sm bg-white/10 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary"
+                placeholder="your@email.com"
+                className="w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-gray-600 text-sm focus:outline-none focus:border-primary/50 focus:bg-white/8 transition-all"
               />
-              <button type="submit" className="bg-primary text-white px-4 py-2 rounded-xl text-sm hover:bg-orange-600 transition-colors">
-                Go
+              <button
+                type="submit"
+                className="w-full btn-primary py-3 text-sm rounded-2xl"
+              >
+                Subscribe
               </button>
             </form>
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-gray-500">
-          <p>© {new Date().getFullYear()} QuickBite. All rights reserved.</p>
-          <div className="flex gap-4">
+        {/* Bottom bar */}
+        <div className="border-t border-white/5 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-xs text-gray-600">
+            © {new Date().getFullYear()} QuickBite. All rights reserved.
+          </p>
+          <div className="flex items-center gap-5 text-xs text-gray-600">
             <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
             <a href="#" className="hover:text-primary transition-colors">Refund Policy</a>
