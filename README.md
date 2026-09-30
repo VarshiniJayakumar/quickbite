@@ -59,8 +59,8 @@ npm run seed
 ```
 
 This creates **12 food items** and an **admin account**:
-- Email: `admin@quickbite.com`
-- Password: `Admin@1234`
+- Email: Demo credentials: Available on request.
+- Password: Demo credentials: Available on request.
 
 ### 4. Run in development
 
